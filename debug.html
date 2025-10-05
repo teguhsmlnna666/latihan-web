@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PWA Debug Page</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #1e1e1e;
+      color: #d4d4d4;
+    }
+    h1 { color: #4EC9B0; }
+    h2 { color: #DCDCAA; margin-top: 30px; }
+    .section {
+      background: #252526;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      border-left: 3px solid #007ACC;
+    }
+    .success { color: #4EC9B0; }
+    .error { color: #F48771; }
+    .warning { color: #CE9178; }
+    button {
+      background: #007ACC;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+      font-family: inherit;
+    }
+    button:hover { background: #005A9E; }
+    pre {
+      background: #1e1e1e;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-size: 12px;
+    }
+    .status-indicator {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+    .online { background: #4EC9B0; }
+    .offline { background: #F48771; }
+  </style>
+</head>
+<body>
+  <h1>🔧 PWA Debug & Test Page</h1>
+  
+  <div class="section">
+    <h2>📡 Connection Status</h2>
+    <p>
+      <span id="connectionDot" class="status-indicator"></span>
+      Status: <strong id="connectionText">Checking...</strong>
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>🔄 Service Worker Status</h2>
+    <p>Support: <strong id="swSupport" class="warning">Checking...</strong></p>
+    <p>Registration: <strong id="swRegistration" class="warning">Checking...</strong></p>
+    <p>Active: <strong id="swActive" class="warning">Checking...</strong></p>
+    <p>Scope: <strong id="swScope" class="warning">-</strong></p>
+    <button onclick="checkServiceWorker()">🔄 Refresh SW Status</button>
+    <button onclick="unregisterSW()">❌ Unregister SW</button>
+  </div>
+
+  <div class="section">
+    <h2>💾 Cache Status</h2>
+    <p>Total Caches: <strong id="cacheCount" class="warning">Checking...</strong></p>
+    <div id="cacheDetails"></div>
+    <button onclick="checkCache()">🔄 Refresh Cache</button>
+    <button onclick="clearAllCache()">🗑️ Clear All Cache</button>
+  </div>
+
+  <div class="section">
+    <h2>🧪 Offline Test</h2>
+    <p>Klik tombol di bawah untuk test navigasi offline:</p>
+    <button onclick="testOffline('index.html')">Test Index</button>
+    <button onclick="testOffline('about.html')">Test About</button>
+    <button onclick="testOffline('contact.html')">Test Contact</button>
+    <button onclick="testOffline('offline.html')">Test Offline Page</button>
+    <div id="testResults" style="margin-top: 15px;"></div>
+  </div>
+
+  <div class="section">
+    <h2>📝 Console Logs</h2>
+    <pre id="logs" style="max-height: 300px; overflow-y: auto;"></pre>
+    <button onclick="clearLogs()">🗑️ Clear Logs</button>
+  </div>
+
+  <div class="section">
+    <h2>🔗 Quick Actions</h2>
+    <button onclick="location.reload()">🔄 Reload Page</button>
+    <button onclick="hardReload()">⚡ Hard Reload (Ctrl+Shift+R)</button>
+    <button onclick="window.location.href='index.html'">🏠 Go to Home</button>
+  </div>
+
+  <script>
+    const logs = [];
+    
+    function log(message, type = 'info') {
+      const timestamp = new Date().toLocaleTimeString();
+      const logEntry = `[${timestamp}] ${message}`;
+      logs.push(logEntry);
+      document.getElementById('logs').textContent = logs.join('\n');
+      console.log(logEntry);
+      
+      if (type === 'error') {
+        console.error(message);
+      }
+    }
+
+    function clearLogs() {
+      logs.length = 0;
+      document.getElementById('logs').textContent = '';
+    }
+
+    // Connection Status
+    function updateConnectionStatus() {
+      const dot = document.getElementById('connectionDot');
+      const text = document.getElementById('connectionText');
+      
+      if (navigator.onLine) {
+        dot.className = 'status-indicator online';
+        text.textContent = 'ONLINE';
+        text.className = 'success';
+      } else {
+        dot.className = 'status-indicator offline';
+        text.textContent = 'OFFLINE';
+        text.className = 'error';
+      }
+    }
+
+    // Service Worker Check
+    async function checkServiceWorker() {
+      log('Checking Service Worker...');
+      
+      const swSupport = document.getElementById('swSupport');
+      const swRegistration = document.getElementById('swRegistration');
+      const swActive = document.getElementById('swActive');
+      const swScope = document.getElementById('swScope');
+      
+      if ('serviceWorker' in navigator) {
+        swSupport.textContent = 'SUPPORTED ✓';
+        swSupport.className = 'success';
+        log('Service Worker is supported');
+        
+        try {
+          const registration = await navigator.serviceWorker.getRegistration();
+          
+          if (registration) {
+            swRegistration.textContent = 'REGISTERED ✓';
+            swRegistration.className = 'success';
+            swScope.textContent = registration.scope;
+            log(`Service Worker registered with scope: ${registration.scope}`);
+            
+            if (registration.active) {
+              swActive.textContent = 'ACTIVE ✓';
+              swActive.className = 'success';
+              log('Service Worker is active');
+            } else {
+              swActive.textContent = 'NOT ACTIVE ✗';
+              swActive.className = 'error';
+              log('Service Worker is NOT active', 'error');
+            }
+          } else {
+            swRegistration.textContent = 'NOT REGISTERED ✗';
+            swRegistration.className = 'error';
+            swActive.textContent = '-';
+            swScope.textContent = '-';
+            log('No Service Worker registered', 'error');
+          }
+        } catch (error) {
+          log('Error checking Service Worker: ' + error.message, 'error');
+        }
+      } else {
+        swSupport.textContent = 'NOT SUPPORTED ✗';
+        swSupport.className = 'error';
+        log('Service Worker NOT supported in this browser', 'error');
+      }
+    }
+
+    // Unregister Service Worker
+    async function unregisterSW() {
+      if ('serviceWorker' in navigator) {
+        const registration = await navigator.serviceWorker.getRegistration();
+        if (registration) {
+          await registration.unregister();
+          log('Service Worker unregistered');
+          alert('Service Worker unregistered! Reload page to re-register.');
+          checkServiceWorker();
+        } else {
+          alert('No Service Worker to unregister');
+        }
+      }
+    }
+
+    // Cache Check
+    async function checkCache() {
+      log('Checking caches...');
+      
+      if ('caches' in window) {
+        const cacheNames = await caches.keys();
+        document.getElementById('cacheCount').textContent = cacheNames.length;
+        document.getElementById('cacheCount').className = 'success';
+        
+        let html = '';
+        for (const name of cacheNames) {
+          const cache = await caches.open(name);
+          const keys = await cache.keys();
+          html += `<p><strong>${name}</strong> (${keys.length} items):</p><ul>`;
+          keys.forEach(req => {
+            html += `<li style="font-size: 12px;">${req.url}</li>`;
+          });
+          html += '</ul>';
+          log(`Cache: ${name} has ${keys.length} items`);
+        }
+        document.getElementById('cacheDetails').innerHTML = html || '<p>No caches found</p>';
+      }
+    }
+
+    // Clear All Cache
+    async function clearAllCache() {
+      if ('caches' in window) {
+        const cacheNames = await caches.keys();
+        for (const name of cacheNames) {
+          await caches.delete(name);
+          log(`Deleted cache: ${name}`);
+        }
+        alert('All caches cleared!');
+        checkCache();
+      }
+    }
+
+    // Test Offline
+    async function testOffline(page) {
+      const resultsDiv = document.getElementById('testResults');
+      resultsDiv.innerHTML = `<p class="warning">Testing ${page}...</p>`;
+      log(`Testing fetch for: ${page}`);
+      
+      try {
+        const response = await fetch(page);
+        if (response.ok) {
+          resultsDiv.innerHTML = `<p class="success">✓ ${page} - Status: ${response.status} (${response.statusText})</p>`;
+          log(`✓ ${page} fetched successfully`);
+        } else {
+          resultsDiv.innerHTML = `<p class="error">✗ ${page} - Status: ${response.status} (${response.statusText})</p>`;
+          log(`✗ ${page} failed with status ${response.status}`, 'error');
+        }
+      } catch (error) {
+        resultsDiv.innerHTML = `<p class="error">✗ ${page} - Error: ${error.message}</p>`;
+        log(`✗ ${page} error: ${error.message}`, 'error');
+      }
+    }
+
+    // Hard Reload
+    function hardReload() {
+      location.reload(true);
+    }
+
+    // Initialize
+    updateConnectionStatus();
+    checkServiceWorker();
+    checkCache();
+    
+    window.addEventListener('online', updateConnectionStatus);
+    window.addEventListener('offline', updateConnectionStatus);
+    
+    log('Debug page loaded');
+  </script>
+</body>
+</html>

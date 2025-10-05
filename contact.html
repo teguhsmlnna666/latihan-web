@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact Me - Teguh Portfolio</title>
     <meta name="description" content="Hubungi Teguh Esa Maulanna melalui email, Instagram, atau WhatsApp" />
-    <link rel="stylesheet" href="./style.css" />
-    <link rel="manifest" href="./manifest.json" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#384959" />
-    <link rel="apple-touch-icon" href="./image/icon-192.png" />
+    <link rel="apple-touch-icon" href="image/icon-192.png" />
     <script>
       function handleSubmit(event) {
         event.preventDefault();
@@ -23,9 +23,9 @@
         <p>teguhsmlnna</p>
       </div>
       <div class="nav-right">
-        <a href="./index.html">Home</a>
-        <a href="./about.html">About</a>
-        <a href="./contact.html">Contact</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
         <span id="connectionStatus" style="margin-left: 15px; padding: 5px 12px; border-radius: 12px; font-size: 0.85rem; font-weight: bold;"></span>
       </div>
     </nav>
@@ -81,7 +81,7 @@
       // Register Service Worker
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./service-worker.js')
+          navigator.serviceWorker.register('service-worker.js')
             .then((registration) => {
               console.log('✅ Service Worker registered successfully:', registration.scope);
             })
