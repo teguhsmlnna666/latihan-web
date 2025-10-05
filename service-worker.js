@@ -1,25 +1,24 @@
-const CACHE_NAME = 'teguh-portfolio-v2';
+const CACHE_NAME = 'teguh-portfolio-v4';
+const OFFLINE_PAGE = './offline.html';
+
+// Only cache offline page and essential assets
 const urlsToCache = [
-  './',
-  './index.html',
-  './about.html',
-  './contact.html',
-  './offline.html',
   './style.css',
-  './manifest.json'
+  './manifest.json',
+  OFFLINE_PAGE
 ];
 
-// Install event - cache resources
+// Install event - cache only offline page
 self.addEventListener('install', (event) => {
   console.log('[Service Worker] Installing...');
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        console.log('[Service Worker] Caching all files');
+        console.log('[Service Worker] Caching offline page and assets');
         return cache.addAll(urlsToCache);
       })
       .then(() => {
-        console.log('[Service Worker] All files cached successfully');
+        console.log('[Service Worker] Offline page cached successfully');
       })
       .catch((error) => {
         console.error('[Service Worker] Cache failed:', error);
@@ -46,49 +45,41 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Fetch event - serve from cache, fallback to network, then offline page
+// Fetch event - Network Only with offline fallback
 self.addEventListener('fetch', (event) => {
   // Skip non-GET requests
   if (event.request.method !== 'GET') {
     return;
   }
 
+  // Skip cross-origin requests
+  if (!event.request.url.startsWith(self.location.origin)) {
+    return;
+  }
+
   event.respondWith(
-    caches.match(event.request)
-      .then((cachedResponse) => {
-        // Return cached response if found
-        if (cachedResponse) {
-          console.log('[Service Worker] Serving from cache:', event.request.url);
-          return cachedResponse;
+    // Always try network first (no caching of pages)
+    fetch(event.request)
+      .then((response) => {
+        console.log('[Service Worker] Network success for:', event.request.url);
+        return response;
+      })
+      .catch(() => {
+        console.log('[Service Worker] Network failed (OFFLINE), showing offline page');
+        
+        // If network fails (offline), show offline page for HTML requests
+        if (event.request.headers.get('accept').includes('text/html')) {
+          return caches.match(OFFLINE_PAGE);
         }
         
-        // Try to fetch from network
-        console.log('[Service Worker] Fetching from network:', event.request.url);
-        return fetch(event.request)
-          .then((response) => {
-            // Check if valid response
-            if (!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
+        // For CSS and other assets, try to serve from cache
+        return caches.match(event.request)
+          .then((cachedResponse) => {
+            if (cachedResponse) {
+              return cachedResponse;
             }
             
-            // Clone and cache the response
-            const responseToCache = response.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(event.request, responseToCache);
-            });
-            
-            return response;
-          })
-          .catch((error) => {
-            console.log('[Service Worker] Fetch failed, serving offline page:', error);
-            
-            // If request is for a page (HTML), return offline page
-            if (event.request.headers.get('accept').includes('text/html')) {
-              return caches.match('./offline.html')
-                .then(response => response || caches.match('/offline.html'));
-            }
-            
-            // For other resources, return nothing
+            // If not in cache, return error response
             return new Response('Offline - Resource not available', {
               status: 503,
               statusText: 'Service Unavailable',

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./style.css" />
     <link rel="manifest" href="./manifest.json" />
     <meta name="theme-color" content="#384959" />
-    <link rel="apple-touch-icon" href="./image/icon-512.png" />
+    <link rel="apple-touch-icon" href="./image/icon-192.png" />
   </head>
   <body>
     <nav>
@@ -19,6 +19,7 @@
         <a href="./index.html">Home</a>
         <a href="./about.html">About</a>
         <a href="./contact.html">Contact</a>
+        <span id="connectionStatus" style="margin-left: 15px; padding: 5px 12px; border-radius: 12px; font-size: 0.85rem; font-weight: bold;"></span>
       </div>
     </nav>
     <div class="main-grid">
@@ -124,6 +125,25 @@
         installStatus.textContent = '✓ Anda sedang menggunakan PWA mode!';
         installStatus.style.color = '#28a745';
       }
+
+      // Online/Offline Status Indicator
+      const statusIndicator = document.getElementById('connectionStatus');
+      
+      function updateConnectionStatus() {
+        if (navigator.onLine) {
+          statusIndicator.textContent = '🟢 Online';
+          statusIndicator.style.background = '#4CAF50';
+          statusIndicator.style.color = 'white';
+        } else {
+          statusIndicator.textContent = '🔴 Offline';
+          statusIndicator.style.background = '#f44336';
+          statusIndicator.style.color = 'white';
+        }
+      }
+      
+      updateConnectionStatus();
+      window.addEventListener('online', updateConnectionStatus);
+      window.addEventListener('offline', updateConnectionStatus);
     </script>
   </body>
 </html>
