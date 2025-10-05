@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Offline - Teguh Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#384959" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-left">
+        <p>teguhsmlnna</p>
+      </div>
+      <div class="nav-right">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+
+    <div class="main-grid">
+      <div class="main-left">
+        <h1>🔌 Anda Sedang Offline</h1>
+        <p>
+          Maaf, sepertinya Anda tidak terhubung ke internet saat ini.
+        </p>
+        <p>
+          Beberapa halaman yang sudah Anda kunjungi sebelumnya mungkin masih 
+          dapat diakses secara offline.
+        </p>
+        <p>
+          Silakan periksa koneksi internet Anda dan coba lagi.
+        </p>
+        <button onclick="window.location.reload()" style="
+          display: inline-block;
+          margin-top: 20px;
+          padding: 10px 22px;
+          font-weight: bold;
+          background: #384959;
+          color: #fff;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          box-shadow: 0 4px 6px rgba(0,0,0,0.18);
+        ">
+          Coba Lagi
+        </button>
+      </div>
+
+      <div class="main-right">
+        <div class="profile-card">
+          <h2>Info PWA</h2>
+          <p style="color: #384959;">
+            Website ini adalah Progressive Web App yang dapat bekerja offline 
+            untuk halaman yang sudah dikunjungi.
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

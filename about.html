@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Me - Teguh Portfolio</title>
+    <meta name="description" content="Tentang Teguh Esa Maulanna - Mahasiswa Informatika Universitas Andalas" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#384959" />
+    <link rel="apple-touch-icon" href="/image/icon-512.png" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-left">
+        <p>teguhsmlnna</p>
+      </div>
+      <div class="nav-right">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+
+    <div class="main-grid">
+      <div class="main-left">
+        <h1>Perkenalan Singkat</h1>
+        <p>Nama Saya Teguh Esa Maulanna dengan NIM 2411532005.</p>
+        <p>
+          Saya adalah Mahasiswa Semester 3 di Jurusan Informatika Fakultas
+          Teknologi Informasi Universitas Andalas.
+        </p>
+        <p>Saat ini saya sedang mengikuti Mata Kuliah Desain Web.</p>
+        
+        <h2>Tentang Website Ini</h2>
+        <p>
+          Website ini dibuat sebagai project untuk mata kuliah Desain Web dan 
+          telah dikembangkan menjadi <b>Progressive Web App (PWA)</b>.
+        </p>
+        <p>
+          Dengan teknologi PWA, website ini dapat memberikan pengalaman seperti 
+          aplikasi native dengan fitur offline, install ke perangkat, dan performa 
+          yang lebih cepat.
+        </p>
+      </div>
+
+      <div class="main-right">
+        <div class="profile-card">
+          <h2>Teguh Esa Maulanna</h2>
+          <p>Informatika</p>
+          <div class="profile-actions">
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Register Service Worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js')
+            .then((registration) => {
+              console.log('Service Worker registered successfully:', registration.scope);
+            })
+            .catch((error) => {
+              console.log('Service Worker registration failed:', error);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Me - Teguh Portfolio</title>
+    <meta name="description" content="Hubungi Teguh Esa Maulanna melalui email, Instagram, atau WhatsApp" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#384959" />
+    <link rel="apple-touch-icon" href="/image/icon-512.png" />
+    <script>
+      function handleSubmit(event) {
+        event.preventDefault();
+        alert("Form berhasil dikirim!");
+        event.target.reset();
+      }
+    </script>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-left">
+        <p>teguhsmlnna</p>
+      </div>
+      <div class="nav-right">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+
+    <div class="main-grid">
+      <div class="main-left">
+        <h1>Hubungi Saya</h1>
+        <div class="contact-links">
+          <p>
+            Kamu bisa menghubungi saya melalui beberapa platform berikut:
+          </p>
+            <a href="mailto:teguhesamaulanna6@gmail.com">Email</a>
+            <a href="https://www.instagram.com/teguhsmlnna/" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://wa.me/6282181769253" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+        <p style="margin-top: 20px; font-size: 0.95rem; color: #666;">
+          💡 <b>Tips:</b> Halaman ini dapat diakses secara offline setelah Anda mengunjunginya 
+          pertama kali, berkat teknologi PWA yang kami gunakan.
+        </p>
+      </div>
+
+      <div class="main-right">
+        <div class="form-container">
+          <h2>Kirim Pesan</h2>
+          <form onsubmit="handleSubmit(event)">
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" name="nama" required />
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required />
+
+            <label for="kategori">Kategori Pesan:</label>
+            <select id="kategori" name="kategori">
+              <option value="pertanyaan">Pertanyaan</option>
+              <option value="saran">Saran</option>
+              <option value="masalah">Masalah</option>
+            </select>
+
+            <label for="pesan">Pesan:</label>
+            <textarea id="pesan" name="pesan" rows="4" required></textarea>
+
+            <p>Apakah ingin menerima balasan?</p>
+            <label><input type="radio" name="balasan" value="ya" /> Ya</label>
+            <label><input type="radio" name="balasan" value="tidak" /> Tidak</label>
+
+            <button type="submit">Kirim</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Register Service Worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js')
+            .then((registration) => {
+              console.log('Service Worker registered successfully:', registration.scope);
+            })
+            .catch((error) => {
+              console.log('Service Worker registration failed:', error);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>

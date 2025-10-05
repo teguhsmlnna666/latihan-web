@@ -1,0 +1,289 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    background: linear-gradient(to right, #6A89A7, #BDDDFC, #e0f7fa);
+    color: #333;
+    text-align: center;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* NAVBAR */
+nav {
+    position: sticky; 
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+
+}
+.nav-left {
+    margin-left: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #384959;
+}
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-right: 20px;
+}
+nav a {
+    display: inline-block;
+    margin: 0 15px;
+    padding: 2px 10px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #384959;
+    border-radius: 8px 16px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: background 0.3s, transform 0.2s, color 0.3s;
+}
+nav a:hover {
+    background-color: #2b3642;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+/* MAIN LAYOUT */
+.main-grid {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 48px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 40px 32px;
+    background: rgba(255,255,255,0.18);
+    border: 1.5px solid rgba(56,73,89,0.12);
+    border-radius: 28px;
+    box-shadow: 0 8px 32px rgba(56,73,89,0.18);
+    backdrop-filter: blur(16px);
+}
+.main-left {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    min-width: 0;
+}
+.main-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-width: 280px;
+}
+
+/* PROFILE CARD */
+.profile-card {
+    min-width: 320px;
+    max-width: 350px;
+    padding: 32px 28px;
+    text-align: center;
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(56,73,89,0.12);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(56,73,89,0.18);
+    backdrop-filter: blur(8px);
+}
+.profile-card h2 {
+    margin-bottom: 8px;
+    font-size: 1.5rem;
+    color: #384959;
+}
+.profile-card p {
+    margin-bottom: 18px;
+    color: #DADADA;
+}
+.profile-actions a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 22px;
+    font-weight: bold;
+    text-decoration: none;
+    background: #384959;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.18);
+    transition: background 0.3s, transform 0.2s;
+}
+.profile-actions a:hover {
+    background: #2b3642;
+    transform: scale(1.05);
+}
+
+/* TYPOGRAPHY */
+h1 {
+    margin-bottom: 18px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: left;
+    color: #384959;
+}
+h2 {
+    margin-bottom: 18px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: left;
+    color: #384959;
+}
+p {
+    margin-bottom: 14px;
+    font-size: 1.1rem;
+    text-align: left;
+}
+
+/* BUTTONS */
+#installBtn,
+.container #installBtn {
+    display: inline-block;
+    margin: 0 8px;
+    padding: 10px 22px;
+    width: 100px;
+    font-weight: bold;
+    text-decoration: none;
+    background: #384959;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.18);
+    transition: background 0.3s, transform 0.2s;
+}
+#installBtn:hover,
+.container #installBtn:hover {
+    background: #2b3642;
+    transform: scale(1.05);
+}
+
+/* CONTACT LINKS */
+.contact-links {
+    margin-top: 24px;
+}
+.contact-links a {
+    display: inline-block;
+    margin: 0 8px;
+    padding: 10px 22px;
+    font-weight: bold;
+    text-decoration: none;
+    background: #384959;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.18);
+    transition: background 0.3s, transform 0.2s;
+}
+.contact-links a:hover {
+    background: #2b3642;
+    transform: scale(1.05);
+}
+
+/* FORM */
+.form-container {
+    max-width: 380px;
+    margin: 0 auto;
+    padding: 24px 20px;              
+    text-align: left;
+    background: transparent;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(56,73,89,0.10);
+}
+.form-container h2 {
+    margin-bottom: 14px;
+    font-size: 1.3rem;              
+    color: #384959;
+}
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 0.95rem; 
+    color: #384959;
+}
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+    width: 100%;
+    padding: 8px 10px;               
+    margin-bottom: 12px;             
+    font-size: 0.95rem;              
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+textarea {
+    resize: vertical;
+    min-height: 80px;               
+}
+input[type="radio"] {
+    margin-right: 6px;
+}
+.form-container p {
+    margin: 10px 0;
+    font-size: 1rem;                
+}
+.form-container button[type="submit"] {
+    display: inline-block;
+    margin: 0 8px;
+    padding: 10px 22px;
+    width: 250px;
+    font-weight: bold;
+    text-decoration: none;
+    background: #384959;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.18);
+    transition: background 0.3s, transform 0.2s;
+}
+.form-container button[type="submit"]:hover {
+    background: #2b3642;
+    transform: scale(1.05);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .main-grid {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 32px;
+    }
+    .main-right {
+        justify-content: center;
+    }
+    .main-left {
+        text-align: center;
+        align-items: center;
+    }
+    h1, h2, p {
+        text-align: center;
+    }
+}
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+    .main-grid {
+        padding: 0 8px;
+    }
+    .profile-card {
+        min-width: 0;
+        width: 100%;
+        padding: 20px 10px;
+    }
+    .form-container {
+        padding: 20px 10px;
+    }
+}
+
