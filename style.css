@@ -372,22 +372,54 @@ input[type="radio"] {
 
 /* OFFLINE PAGE */
 body.offline {
-  background: #e5f0fa; /* sama seperti body normal */
+  background: #e5f0fa;
   color: #333;
 }
 
-body.offline .welcome {
-  background: linear-gradient(to right, #91adc2, #BDDDFC, #e0f7fa);
-  min-height: 70vh;
+body.offline .welcome-content {
+  text-align: center;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+body.offline .welcome-content h1 {
+  text-align: center;
+  color: #2c3e50;
+}
+
+body.offline .welcome-content p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #444;
+}
+
+.offline-actions {
+  margin-top: 24px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 24px;
-  padding: 40px 32px;
-  border: 1.5px solid rgba(56,73,89,0.12);
-  border-radius: 100px;
-  box-shadow: 0 8px 32px rgba(56,73,89,0.18);
-  backdrop-filter: blur(16px);
+}
+
+.offline-actions a,
+.offline-actions button {
+  display: inline-block;
+  padding: 12px 28px;
+  font-weight: bold;
+  text-decoration: none;
+  background: #384959;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.18);
+  transition: background 0.3s, transform 0.2s;
+  font-size: 1rem;
+}
+
+.offline-actions a:hover,
+.offline-actions button:hover {
+  background: #2b3642;
+  transform: scale(1.05);
 }
 
