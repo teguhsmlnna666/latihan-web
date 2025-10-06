@@ -372,33 +372,22 @@ input[type="radio"] {
 
 /* OFFLINE PAGE */
 body.offline {
-    background: #222;
-    color: #fff;
+  background: #e5f0fa; /* sama seperti body normal */
+  color: #333;
 }
-body.offline .container {
-    background: #333;
-    color: #fff;
+
+body.offline .welcome {
+  background: linear-gradient(to right, #91adc2, #BDDDFC, #e0f7fa);
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 40px 32px;
+  border: 1.5px solid rgba(56,73,89,0.12);
+  border-radius: 100px;
+  box-shadow: 0 8px 32px rgba(56,73,89,0.18);
+  backdrop-filter: blur(16px);
 }
-.offline-actions {
-    margin-top: 24px;
-}
-.offline-actions a,
-.offline-actions button {
-    display: inline-block;
-    margin: 0 8px;
-    padding: 10px 22px;
-    font-weight: bold;
-    text-decoration: none;
-    background: #384959;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.18);
-    transition: background 0.3s, transform 0.2s;
-}
-.offline-actions a:hover,
-.offline-actions button:hover {
-    background: #2b3642;
-    transform: scale(1.05);
-}
+

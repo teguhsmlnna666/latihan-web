@@ -2,19 +2,38 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Offline</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline - teguhsmlnna</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#384959" />
+  <link rel="icon" href="icons/logo-512.png" type="image/png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 </head>
 <body class="offline">
-  <div class="container">
-    <h1>Oops! Kamu sedang offline</h1>
-    <p>Sepertinya koneksi internetmu terputus.</p>
-    <p>Jangan khawatir, kamu tetap bisa membuka halaman yang sudah tersimpan di perangkat.</p>
-    
-    <div class="offline-actions">
-      <a href="index.html">Kembali ke Beranda</a>
-      <button onclick="window.location.reload()">Coba Lagi</button>
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-left">
+      <p>teguhsmlnna</p>
     </div>
-  </div>
+    <div class="nav-right">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <!-- OFFLINE CONTENT -->
+  <section class="welcome">
+    <div class="welcome-content">
+      <h1>⚠ Kamu Sedang Offline</h1>
+      <p>Sepertinya koneksi internetmu terputus. Jangan khawatir, kamu masih bisa membuka halaman yang sudah pernah dikunjungi.</p>
+      
+      <div class="offline-actions">
+        <a href="index.html">🔄 Coba Lagi</a>
+        <button onclick="window.location.reload();">Refresh</button>
+      </div>
+    </div>
+  </section>
 </body>
 </html>
