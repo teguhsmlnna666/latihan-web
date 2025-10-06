@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact Me - Teguh Portfolio</title>
-    <meta name="description" content="Hubungi Teguh Esa Maulanna melalui email, Instagram, atau WhatsApp" />
+    <title>teguhsmlnna - contact</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#384959" />
-    <link rel="apple-touch-icon" href="image/icon-512.png" />
+    <link rel="icon" href="icons/logo-512.png" type="image/png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
     <script>
       function handleSubmit(event) {
         event.preventDefault();
@@ -26,7 +24,6 @@
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
-        <span id="connectionStatus" style="margin-left: 15px; padding: 5px 12px; border-radius: 12px; font-size: 0.85rem; font-weight: bold;"></span>
       </div>
     </nav>
 
@@ -38,13 +35,9 @@
             Kamu bisa menghubungi saya melalui beberapa platform berikut:
           </p>
             <a href="mailto:teguhesamaulanna6@gmail.com">Email</a>
-            <a href="https://www.instagram.com/teguhsmlnna/" target="_blank" rel="noopener">Instagram</a>
-            <a href="https://wa.me/6282181769253" target="_blank" rel="noopener">WhatsApp</a>
+            <a href="https://www.instagram.com/teguhsmlnna/">Instagram</a>
+            <a href="https://wa.me/6282181769253">WhatsApp</a>
         </div>
-        <p style="margin-top: 20px; font-size: 0.95rem; color: #666;">
-          💡 <b>Tips:</b> Halaman ini dapat diakses secara offline setelah Anda mengunjunginya 
-          pertama kali, berkat teknologi PWA yang kami gunakan.
-        </p>
       </div>
 
       <div class="main-right">
@@ -76,39 +69,5 @@
         </div>
       </div>
     </div>
-
-    <script>
-      // Register Service Worker
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('service-worker.js')
-            .then((registration) => {
-              console.log('✅ Service Worker registered successfully:', registration.scope);
-            })
-            .catch((error) => {
-              console.error('❌ Service Worker registration failed:', error);
-            });
-        });
-      }
-
-      // Online/Offline Status Indicator
-      const statusIndicator = document.getElementById('connectionStatus');
-      
-      function updateConnectionStatus() {
-        if (navigator.onLine) {
-          statusIndicator.textContent = '🟢 Online';
-          statusIndicator.style.background = '#4CAF50';
-          statusIndicator.style.color = 'white';
-        } else {
-          statusIndicator.textContent = '🔴 Offline';
-          statusIndicator.style.background = '#f44336';
-          statusIndicator.style.color = 'white';
-        }
-      }
-      
-      updateConnectionStatus();
-      window.addEventListener('online', updateConnectionStatus);
-      window.addEventListener('offline', updateConnectionStatus);
-    </script>
   </body>
 </html>

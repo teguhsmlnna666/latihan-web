@@ -5,7 +5,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 body {
-    background: linear-gradient(to right, #6A89A7, #BDDDFC, #e0f7fa);
+    background: #e5f0fa;
     color: #333;
     text-align: center;
     padding: 20px;
@@ -27,6 +27,7 @@ nav {
 
 }
 .nav-left {
+    margin-top: 20px;
     margin-left: 20px;
     font-size: 1.2rem;
     font-weight: bold;
@@ -57,17 +58,17 @@ nav a:hover {
 
 /* MAIN LAYOUT */
 .main-grid {
+    height: auto;
+    background: linear-gradient(to right, #91adc2, #BDDDFC, #e0f7fa);
     display: flex;
     justify-content: center;
     align-items: flex-start;
     gap: 48px;
     width: 100%;
-    max-width: 1200px;
-    margin: 40px auto;
+    margin: 0;
     padding: 40px 32px;
-    background: rgba(255,255,255,0.18);
     border: 1.5px solid rgba(56,73,89,0.12);
-    border-radius: 28px;
+    border-radius: 100px;
     box-shadow: 0 8px 32px rgba(56,73,89,0.18);
     backdrop-filter: blur(16px);
 }
@@ -87,6 +88,75 @@ nav a:hover {
     min-width: 280px;
 }
 
+.welcome {  
+    background: linear-gradient(to right, #91adc2, #BDDDFC, #e0f7fa);
+    min-height: 80vh; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 48px;
+    width: 100%;
+    margin: 40px 0px; 
+    padding: 40px 32px;
+    border: 1.5px solid rgba(56,73,89,0.12);
+    border-radius: 100px;
+    box-shadow: 0 8px 32px rgba(56,73,89,0.18);
+    backdrop-filter: blur(16px);
+}
+
+.welcome-content {
+    text-align: left;
+    max-width: 800px; 
+    padding: 0 20px;
+}
+
+.welcome h1 {
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 16px;
+}
+
+.welcome p {
+    font-size: 1.2rem;
+    color: #444;
+    line-height: 1.6;
+}
+
+.features {
+    background: linear-gradient(to right, #91adc2, #BDDDFC, #e0f7fa);
+    padding: 40px 32px;
+    border-radius: 100px;
+    box-shadow: 0 8px 32px rgba(56,73,89,0.18);
+    backdrop-filter: blur(16px);
+    text-align: left; 
+}
+
+.feature-item h2 {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    color: #2c3e50;
+}
+
+.feature-item p {
+    margin-bottom: 16px;
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+.feature-item ul {
+  list-style: none; 
+  padding-left: 0;
+}
+
+.feature-item li {
+  margin-bottom: 10px;
+  padding-left: 28px;
+  position: relative;
+}
+
 /* PROFILE CARD */
 .profile-card {
     min-width: 320px;
@@ -95,7 +165,7 @@ nav a:hover {
     text-align: center;
     background: rgba(255,255,255,0.12);
     border: 1.5px solid rgba(56,73,89,0.12);
-    border-radius: 18px;
+    border-radius: 100px;
     box-shadow: 0 8px 32px rgba(56,73,89,0.18);
     backdrop-filter: blur(8px);
 }
@@ -108,6 +178,17 @@ nav a:hover {
     margin-bottom: 18px;
     color: #DADADA;
 }
+
+.profile-card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 16px;
+    border: 3px solid #384959;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
 .profile-actions a {
     display: inline-block;
     margin-top: 10px;
@@ -190,7 +271,8 @@ p {
 
 /* FORM */
 .form-container {
-    max-width: 380px;
+    max-width: 100%;
+    width: 100%;
     margin: 0 auto;
     padding: 24px 20px;              
     text-align: left;
@@ -236,7 +318,8 @@ input[type="radio"] {
     display: inline-block;
     margin: 0 8px;
     padding: 10px 22px;
-    width: 250px;
+    max-width: 100%;
+    width: 100%;
     font-weight: bold;
     text-decoration: none;
     background: #384959;
@@ -287,3 +370,35 @@ input[type="radio"] {
     }
 }
 
+/* OFFLINE PAGE */
+body.offline {
+    background: #222;
+    color: #fff;
+}
+body.offline .container {
+    background: #333;
+    color: #fff;
+}
+.offline-actions {
+    margin-top: 24px;
+}
+.offline-actions a,
+.offline-actions button {
+    display: inline-block;
+    margin: 0 8px;
+    padding: 10px 22px;
+    font-weight: bold;
+    text-decoration: none;
+    background: #384959;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.18);
+    transition: background 0.3s, transform 0.2s;
+}
+.offline-actions a:hover,
+.offline-actions button:hover {
+    background: #2b3642;
+    transform: scale(1.05);
+}
